@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "226049017929",
+    "firebase_url": "https://cameraapp-8ed24.firebaseio.com",
+    "project_id": "cameraapp-8ed24",
+    "storage_bucket": "cameraapp-8ed24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226049017929:android:967b0a32398a0270",
+        "android_client_info": {
+          "package_name": "in.rasta.cameraapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "226049017929-qbms03k5jft9jj5i5711bohqg0gvo9fb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA24r2LJdoQ4ZnOxmYdOxGBWCd-Nyzn6j8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

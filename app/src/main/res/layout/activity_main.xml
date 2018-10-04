@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="activity"
+            type="in.rasta.cameraapp.MainActivity" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+        <net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu
+            android:id="@+id/addButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="10dp"
+            android:src="@drawable/addnew"
+            app:fab_addButtonColorNormal="@color/colorAccent"
+            fab:fab_labelStyle="@style/menu_labels_style">
+
+
+            <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabAddNew"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{()->activity.captureImage()}"
+                fab:fab_colorNormal="#fff"
+                fab:fab_colorPressed="#fff"
+                fab:fab_icon="@drawable/clickimage"
+                fab:fab_size="mini"
+                fab:fab_title="Click New Image" />
+
+            <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabChooseFromGallery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{()->activity.selectImage()}"
+                fab:fab_colorNormal="#fff"
+                fab:fab_colorPressed="#fff"
+                fab:fab_icon="@drawable/choosefromgallery"
+                fab:fab_size="mini"
+                fab:fab_title="Choose From Gallery" />
+
+
+        </net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu>
+
+
+    </RelativeLayout>
+</layout>

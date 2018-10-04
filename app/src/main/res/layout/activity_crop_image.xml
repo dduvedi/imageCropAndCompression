@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="ViewModel.CropImageViewModel" />
+
+        <variable
+            name="activity"
+            type="in.rasta.cameraapp.CropImageActivity" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:orientation="vertical"
+            android:weightSum="10">
+
+            <com.takusemba.cropme.CropView
+                android:id="@+id/cropView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="9"
+                android:gravity="center_vertical"
+                app:cropme_background_alpha="80%"
+                app:cropme_max_scale="3"
+                app:cropme_result_height="80%"
+                app:cropme_result_width="80%"
+                app:cropme_with_border="true" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_alignParentBottom="true"
+                android:layout_weight="1"
+                android:background="@color/colorPrimaryDark"
+                android:onClick="@{()->activity.cropAndUploadImage()}"
+                android:text="Crop and Upload"
+                android:textColor="#fff" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

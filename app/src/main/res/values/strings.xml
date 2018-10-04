@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Camera</string>
+    <string name="welcome_message">Welcome!\n Start capturing the moments.</string>
+</resources>
