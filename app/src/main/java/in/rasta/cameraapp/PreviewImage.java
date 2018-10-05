@@ -6,13 +6,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
-public class PreviewDocImage extends AppCompatActivity {
+import Utility.TouchImageView;
+
+public class PreviewImage extends AppCompatActivity {
     private Toolbar toolbar;
-    private ImageView previewImage;
+    private TouchImageView previewImage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,10 +23,10 @@ public class PreviewDocImage extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        previewImage = (ImageView) findViewById(R.id.previewImage);
-        PreferenceManager.getDefaultSharedPreferences(PreviewDocImage.this).edit().putBoolean("isShow", false).commit();
+        previewImage = (TouchImageView) findViewById(R.id.previewImage);
+        PreferenceManager.getDefaultSharedPreferences(PreviewImage.this).edit().putBoolean("isShow", false).commit();
 
-        Picasso.with(PreviewDocImage.this).load(getIntent().getExtras().getString("imageUrl")).into(previewImage);
+        Picasso.with(PreviewImage.this).load(getIntent().getExtras().getString("imageUrl")).into(previewImage);
 
     }
 

@@ -23,7 +23,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="HOME"
+            android:label="IMAGES"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.App.Base" />
 
@@ -33,9 +33,15 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.App.Base" />
 
+        <activity
+            android:name=".ChooseAction"
+            android:label="HOME"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.App.Base" />
+
 
         <activity
-            android:name=".PreviewDocImage"
+            android:name=".PreviewImage"
             android:label="PREVIEW IMAGE"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"

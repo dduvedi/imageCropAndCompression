@@ -20,7 +20,7 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void run() {
                 if (Util.isNetworkConnected(SplashScreen.this)) {
-                    Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+                    Intent intent = new Intent(SplashScreen.this, ChooseAction.class);
                     startActivity(intent);
                     finish();
                     overridePendingTransition(R.anim.right_in, R.anim.left_out);

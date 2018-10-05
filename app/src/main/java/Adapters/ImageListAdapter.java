@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import in.rasta.cameraapp.PreviewDocImage;
+import in.rasta.cameraapp.PreviewImage;
 import in.rasta.cameraapp.R;
 import in.rasta.cameraapp.databinding.AdapterImageListBinding;
 
@@ -94,7 +94,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Bind
     }
 
     public void previewImage(int position) {
-        Intent intent = new Intent(context, PreviewDocImage.class);
+        Intent intent = new Intent(context, PreviewImage.class);
         intent.putExtra("imageUrl", imageList.get(position));
         ActivityOptionsCompat options = ActivityOptionsCompat.
                 makeSceneTransitionAnimation((Activity) context, (View) binding.basicDetailLayout, "profile");

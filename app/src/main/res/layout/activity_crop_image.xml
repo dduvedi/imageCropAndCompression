@@ -31,7 +31,7 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/toolbar"
             android:orientation="vertical"
-            android:weightSum="10">
+            android:weightSum="9">
 
             <com.takusemba.cropme.CropView
                 android:id="@+id/cropView"
@@ -39,7 +39,7 @@
                 android:layout_height="0dp"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="9"
+                android:layout_weight="8.25"
                 android:gravity="center_vertical"
                 app:cropme_background_alpha="80%"
                 app:cropme_max_scale="3"
@@ -51,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_alignParentBottom="true"
-                android:layout_weight="1"
+                android:layout_weight="0.75"
                 android:background="@color/colorPrimaryDark"
                 android:onClick="@{()->activity.cropAndUploadImage()}"
                 android:text="Crop and Upload"

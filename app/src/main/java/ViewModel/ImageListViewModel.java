@@ -26,12 +26,12 @@ public class ImageListViewModel extends ViewModel {
     public LiveData<ArrayList<String>> getImageList() {
         showProgress.setValue(true);
         Query images;
-        if (lastItem == null || lastItem.isEmpty()) {
-            images = FirebaseDatabase.getInstance().getReference().child("images").limitToFirst(itemPerPage);
+       /* if (lastItem == null || lastItem.isEmpty()) {
         } else {
             images = FirebaseDatabase.getInstance().getReference().child("images").startAt(lastItem).limitToFirst(itemPerPage);
         }
-
+*/
+        images = FirebaseDatabase.getInstance().getReference().child("images");
 
         images.addValueEventListener(new ValueEventListener() {
             @Override
