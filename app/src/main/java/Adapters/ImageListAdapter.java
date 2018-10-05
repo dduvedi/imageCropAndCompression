@@ -1,20 +1,23 @@
 package Adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import in.rasta.cameraapp.PreviewDocImage;
 import in.rasta.cameraapp.R;
 import in.rasta.cameraapp.databinding.AdapterImageListBinding;
 
@@ -22,7 +25,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Bind
 
     private Context context;
     private ArrayList<String> imageList;
-
+    private AdapterImageListBinding binding;
 
     public ImageListAdapter(Context context) {
         this.context = context;
@@ -32,7 +35,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Bind
     @Override
     public BindingHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_image_list, parent, false);
-        AdapterImageListBinding binding = DataBindingUtil.bind(view);
+        binding = DataBindingUtil.bind(view);
         return new BindingHolder(binding);
     }
 
@@ -40,6 +43,16 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Bind
     public void onBindViewHolder(final BindingHolder holder, final int position) {
         ImageView viewById = holder.getBinding().getRoot().findViewById(R.id.imageView);
         Picasso.with(context).load(imageList.get(position)).into(viewById);
+
+
+        CardView cardView = holder.getBinding().getRoot().findViewById(R.id.basicDetailLayout);
+
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                previewImage(position);
+            }
+        });
         holder.getBinding().executePendingBindings();
     }
 
@@ -78,5 +91,14 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Bind
         }
 
         notifyItemRangeChanged(size, imageList.size());
+    }
+
+    public void previewImage(int position) {
+        Intent intent = new Intent(context, PreviewDocImage.class);
+        intent.putExtra("imageUrl", imageList.get(position));
+        ActivityOptionsCompat options = ActivityOptionsCompat.
+                makeSceneTransitionAnimation((Activity) context, (View) binding.basicDetailLayout, "profile");
+        context.startActivity(intent, options.toBundle());
+
     }
 }
