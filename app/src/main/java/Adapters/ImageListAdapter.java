@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.CardView;
@@ -17,6 +19,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import Utility.Util;
 import in.rasta.cameraapp.PreviewImage;
 import in.rasta.cameraapp.R;
 import in.rasta.cameraapp.databinding.AdapterImageListBinding;
@@ -41,9 +44,8 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Bind
 
     @Override
     public void onBindViewHolder(final BindingHolder holder, final int position) {
-        ImageView viewById = holder.getBinding().getRoot().findViewById(R.id.imageView);
-        Picasso.with(context).load(imageList.get(position)).into(viewById);
-
+        final ImageView viewById = holder.getBinding().getRoot().findViewById(R.id.imageView);
+        Picasso.with(context).load(imageList.get(position)).placeholder(R.drawable.loading).into(viewById);
 
         CardView cardView = holder.getBinding().getRoot().findViewById(R.id.basicDetailLayout);
 
@@ -54,6 +56,11 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Bind
             }
         });
         holder.getBinding().executePendingBindings();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     @Override
@@ -101,4 +108,5 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Bind
         context.startActivity(intent, options.toBundle());
 
     }
+
 }

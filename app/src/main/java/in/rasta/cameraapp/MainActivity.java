@@ -3,24 +3,16 @@ package in.rasta.cameraapp;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
 
 import Adapters.ImageListAdapter;
-import Utility.PermissionUtil;
 import Utility.Util;
 import ViewModel.ImageListViewModel;
 import in.rasta.cameraapp.databinding.ActivityMainBinding;
@@ -62,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(@Nullable ArrayList<String> strings) {
                 if (strings != null && strings.size() > 0) {
                     imageListAdapter.addAll(strings);
+                } else {
+                    Util.showToast(MainActivity.this, "No image found on server.");
                 }
             }
         });
@@ -93,8 +87,6 @@ public class MainActivity extends AppCompatActivity {
 
         switch (id) {
             case android.R.id.home:
-                Intent intent = new Intent(MainActivity.this, ChooseAction.class);
-                startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
                 return true;
@@ -105,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        finish();
         overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
     }
 

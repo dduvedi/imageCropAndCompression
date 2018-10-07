@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.google.firebase.database.Exclude;
 import com.takusemba.cropme.OnCropListener;
 
 import Interface.ImageCompressor;
@@ -40,7 +41,6 @@ public class CropImageActivity extends AppCompatActivity {
 
 
         registerForLiveData(viewModel);
-
     }
 
     private void registerForLiveData(CropImageViewModel viewModel) {
@@ -48,6 +48,11 @@ public class CropImageActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
                 if (aBoolean) {
+                    Intent intent = new Intent(CropImageActivity.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out);
                     Util.showToast(CropImageActivity.this, "Image uploaded");
                 } else {
                     Util.showToast(CropImageActivity.this, "Error while uploading image");
@@ -77,22 +82,26 @@ public class CropImageActivity extends AppCompatActivity {
 
 
     public void cropAndUploadImage() {
-        if (Util.isNetworkConnected(CropImageActivity.this)) {
-            binding.cropView.crop(new OnCropListener() {
-                @Override
-                public void onSuccess(Bitmap bitmap) {
-                    ImageCompressor imageCompressor = new ImageCompressorImpl();
-                    bitmap = imageCompressor.compressBitmap(CropImageActivity.this, Util.getImageUri(CropImageActivity.this, bitmap));
-                    viewModel.uploadImage(Util.bitmapToByteArray(bitmap));
-                }
+        try {
+            if (Util.isNetworkConnected(CropImageActivity.this)) {
+                binding.cropView.crop(new OnCropListener() {
+                    @Override
+                    public void onSuccess(Bitmap bitmap) {
+                        ImageCompressor imageCompressor = new ImageCompressorImpl();
+                        bitmap = imageCompressor.compressBitmap(CropImageActivity.this, Util.getImageUri(CropImageActivity.this, bitmap));
+                        viewModel.uploadImage(Util.bitmapToByteArray(bitmap));
+                    }
 
-                @Override
-                public void onFailure() {
-                    Util.showToast(CropImageActivity.this, "Error while cropping image...");
-                }
-            });
-        } else {
-            Util.showProgressDialog(CropImageActivity.this, Constants.INTERNET_ERROR);
+                    @Override
+                    public void onFailure() {
+                        Util.showToast(CropImageActivity.this, "Error while cropping image...");
+                    }
+                });
+            } else {
+                Util.showProgressDialog(CropImageActivity.this, Constants.INTERNET_ERROR);
+            }
+        } catch (Exception e) {
+            Util.showToast(CropImageActivity.this, "There is an issue with respect to width of image please edit before submitting.");
         }
     }
 
@@ -102,8 +111,6 @@ public class CropImageActivity extends AppCompatActivity {
 
         switch (id) {
             case android.R.id.home:
-                Intent intent = new Intent(CropImageActivity.this, ChooseAction.class);
-                startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
                 return true;
@@ -114,6 +121,7 @@ public class CropImageActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        finish();
         overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
     }
 }

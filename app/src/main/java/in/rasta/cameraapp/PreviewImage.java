@@ -1,7 +1,6 @@
 package in.rasta.cameraapp;
 
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,15 +23,11 @@ public class PreviewImage extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         previewImage = (TouchImageView) findViewById(R.id.previewImage);
-        PreferenceManager.getDefaultSharedPreferences(PreviewImage.this).edit().putBoolean("isShow", false).commit();
 
         Picasso.with(PreviewImage.this).load(getIntent().getExtras().getString("imageUrl")).into(previewImage);
-
     }
 
-    /**
-     * Overriding back button of android system
-     */
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

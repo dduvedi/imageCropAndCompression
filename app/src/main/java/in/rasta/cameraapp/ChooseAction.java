@@ -126,4 +126,11 @@ public class ChooseAction extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
+    }
+
 }
