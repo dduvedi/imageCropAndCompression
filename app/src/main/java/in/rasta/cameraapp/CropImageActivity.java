@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,8 @@ import android.view.MenuItem;
 
 import com.google.firebase.database.Exclude;
 import com.takusemba.cropme.OnCropListener;
+
+import java.io.FileNotFoundException;
 
 import Interface.ImageCompressor;
 import Interface.ImageCompressorImpl;
@@ -101,7 +104,14 @@ public class CropImageActivity extends AppCompatActivity {
                 Util.showProgressDialog(CropImageActivity.this, Constants.INTERNET_ERROR);
             }
         } catch (Exception e) {
-            Util.showToast(CropImageActivity.this, "There is an issue with respect to width of image please edit before submitting.");
+            try {
+                viewModel.uploadImage(Util.bitmapToByteArray(BitmapFactory.
+                        decodeStream(getContentResolver().openInputStream((Uri) getIntent().getExtras().get("imageUri")))));
+
+            } catch (FileNotFoundException e1) {
+                Util.showToast(CropImageActivity.this, "Error while getting image.");
+                e.printStackTrace();
+            }
         }
     }
 
