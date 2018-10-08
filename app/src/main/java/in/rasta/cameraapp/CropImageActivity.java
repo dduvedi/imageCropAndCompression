@@ -108,7 +108,7 @@ public class CropImageActivity extends AppCompatActivity {
                 viewModel.uploadImage(Util.bitmapToByteArray(BitmapFactory.
                         decodeStream(getContentResolver().openInputStream((Uri) getIntent().getExtras().get("imageUri")))));
 
-            } catch (FileNotFoundException e1) {
+            } catch (FileNotFoundException ex) {
                 Util.showToast(CropImageActivity.this, "Error while getting image.");
                 e.printStackTrace();
             }
